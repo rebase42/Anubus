@@ -157,55 +157,35 @@ namespace Nimbus.Configuration
             return configuration;
         }
 
-		class Test : IBusCommand
-		{
-
-		}
-
-		private void test()
-		{
-			var bus = new BusBuilder().Configure()
-				.WithNames("BusTester", Environment.MachineName)
-				.WithConnectionString("")
-				.WithDefaultTimeout(TimeSpan.FromSeconds(10))
-				.WithSpecificQueueConfig<Test>((m) => new BusBuilderQueueTopicConfiguration()
-					.WithMaxDeliveryAttempts(m, 100))
-				//.WithLogger(new ConsoleLogger())
-				.Build();
-		}
-
 		public static BusBuilderConfiguration WithSpecificQueueConfig<TMsg>(this BusBuilderConfiguration configuration,
-																			Func<TMsg, BusBuilderQueueTopicConfiguration,
-																			BusBuilderQueueTopicConfiguration> queueTopicConfigBuilder)
-			where TMsg : Nimbus.MessageContracts.IBusCommand, Nimbus.MessageContracts.IBusEvent
+																			BusBuilderQueueTopicConfiguration queueTopicConfigBuilder)
+			where TMsg : Nimbus.MessageContracts.IBusCommand
 		{
 			Type t = typeof(TMsg);
 
-			configuration.SpecificQueueTopicConfig.Value.Add(t, );
+			configuration.SpecificQueueTopicConfig.Value.Add(t, queueTopicConfigBuilder);
 
 			return configuration;
 		}
 
 
-		public static BusBuilderQueueTopicConfiguration WithAutoDeleteOnIdle<TMsg>(this BusBuilderQueueTopicConfiguration configuration,
-																				   TMsg msg, TimeSpan autoDeleteOnIdle)
-			where TMsg : Nimbus.MessageContracts.IBusCommand, Nimbus.MessageContracts.IBusEvent
+		public static BusBuilderQueueTopicConfiguration WithAutoDeleteOnIdle(this BusBuilderQueueTopicConfiguration configuration,
+																				   TimeSpan autoDeleteOnIdle)
 		{
 			configuration.AutoDeleteOnIdle = new AutoDeleteOnIdleSetting { Value = autoDeleteOnIdle };
 			return configuration;
 		}
 
-		public static BusBuilderQueueTopicConfiguration WithMaxDeliveryAttempts<TMsg>(this BusBuilderQueueTopicConfiguration configuration,
-																				   TMsg msg, int maxDeliveryAttempts)
-			where TMsg : Nimbus.MessageContracts.IBusCommand, Nimbus.MessageContracts.IBusEvent
+		public static BusBuilderQueueTopicConfiguration WithMaxDeliveryAttempts(this BusBuilderQueueTopicConfiguration configuration,
+																				  int maxDeliveryAttempts)
+			
 		{
 			configuration.MaxDeliveryAttempts = new MaxDeliveryAttemptSetting { Value = maxDeliveryAttempts };
 			return configuration;
 		}
 
-		public static BusBuilderQueueTopicConfiguration WithDefaultMessageLockDuration<TMsg>(this BusBuilderQueueTopicConfiguration configuration,
-																				   TMsg msg, TimeSpan defaultLockDuration)
-			where TMsg : Nimbus.MessageContracts.IBusCommand, Nimbus.MessageContracts.IBusEvent
+		public static BusBuilderQueueTopicConfiguration WithDefaultMessageLockDuration(this BusBuilderQueueTopicConfiguration configuration,
+																				  TimeSpan defaultLockDuration)
 		{
 			configuration.DefaultMessageLockDuration = new DefaultMessageLockDurationSetting { Value = defaultLockDuration };
 			return configuration;
