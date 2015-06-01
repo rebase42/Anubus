@@ -64,6 +64,7 @@
     <Compile Include="ConcurrentCollections\ThreadSafeDictionary.cs" />
     <Compile Include="ConcurrentCollections\ThreadSafeLazy.cs" />
     <Compile Include="Configuration\BusBuilderCompressionConfigurationExtensions.cs" />
+    <Compile Include="Configuration\BusBuilderQueueTopicConfiguration.cs" />
     <Compile Include="Configuration\BusBuilderLargeMessageConfigurationExtensions.cs" />
     <Compile Include="Configuration\BusBuilderSerializationConfigurationExtensions.cs" />
     <Compile Include="Configuration\IMessagePumpsManager.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Configuration\Settings\GlobalOutboundInterceptorTypesSetting.cs" />
     <Compile Include="Configuration\Settings\HeartbeatInterval.cs" />
     <Compile Include="Configuration\Settings\ServerConnectionCountSetting.cs" />
+    <Compile Include="Configuration\Settings\SpecificQueueTopicConfigSettings.cs" />
     <Compile Include="Configuration\Settings\SubscriptionAutoDeleteOnIdleSetting.cs" />
     <Compile Include="Configuration\Settings\SubscriptionDefaultMessageTimeToLiveSetting.cs" />
     <Compile Include="DelayedSendingExtensions.cs" />

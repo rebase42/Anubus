@@ -43,12 +43,14 @@ namespace Nimbus.Configuration
         internal ConcurrentHandlerLimitSetting DefaultConcurrentHandlerLimit { get; set; }
         internal MaximumThreadPoolThreadsSetting MaximumThreadPoolThreads { get; set; }
         internal MinimumThreadPoolThreadsSetting MinimumThreadPoolThreads { get; set; }
+		internal SpecificQueueTopicConfigSettings SpecificQueueTopicConfig { get; private set; }
 
         internal BusBuilderConfiguration()
         {
             Debugging = new BusBuilderDebuggingConfiguration();
             LargeMessageStorageConfiguration = new LargeMessageStorageConfiguration();
             Router = new DestinationPerMessageTypeRouter();
+			SpecificQueueTopicConfig = new SpecificQueueTopicConfigSettings();
 
             Logger = new NullLogger();
             Compressor = new NullCompressor();
